@@ -1,0 +1,58 @@
+{% load static %}
+<div class="pb-6" id="home" style="background-color: rgba(0, 0, 0, 0); margin-top: 0px;">
+    <!-- header -->
+    <header class="header">
+        <div class="container-fluid px-lg-5">
+            <!-- nav -->
+            <nav class="py-4">
+                <div id="logo">
+                    <h1><a href="/" class="editContent"
+                           style="outline: none; outline-offset: -2px; cursor: inherit; color: rgb(255, 255, 255); font-size: 40px; background-color: rgba(0, 0, 0, 0); font-family:&quot;Source: Sans Pro&quot;, sans-serif;">Reciper</a>
+                    </h1>
+                </div>
+
+                <label for="drop" class="toggle">Menu</label>
+                <input type="checkbox" id="drop">
+                <ul class="menu mt-2">
+                    <li><a href="/">Головна</a></li>
+                    {% if user.is_authenticated %}
+                        <li>
+                            <!-- First Tier Drop Down -->
+                            <label for="drop-2" class="toggle">Категории <span class="fa fa-angle-down"
+                                                                               style="z-index: 9000"
+                                                                               aria-hidden="true"></span> </label>
+                            <a href="#">Вітаємо, {{ user.username }} <span class="fa fa-angle-down"
+                                                                           aria-hidden="true"></span></a>
+                            <input type="checkbox" id="drop-2" style="z-index: 9000">
+                            <ul>
+                                <li><a href="{% url 'saved' user.serviseuser.id %}">Збережені рецепти</a></li>
+                                <li><a href="{% url 'own' user.serviseuser.id %}">Мої рецепти</a></li>
+                                <li><a href="/admin/reciper/recipe/add/">Створити рецепт</a></li>
+                                {% if user.is_superuser %}
+                                    <li>
+                                        <a target="_blank" href="/report/">Звіт</a>
+                                    </li>
+                                    <li><a href="/admin/">Адміністративна панель</a></li>
+                                {% endif %}
+                                <li><a href="{% url 'logout' %}">Вихід</a></li>
+
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{% url 'register' %}"
+                               style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">Реєстрація</a>
+                        </li>
+                        <li>
+                            <a href="/accounts/login"
+                               style="color: rgb(255, 255, 255); font-weight: 700; text-transform: uppercase;">Вхід</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <!-- //nav -->
+        </div>
+    </header>
+    <!-- //header -->
+
+</div>

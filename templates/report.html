@@ -1,0 +1,111 @@
+{% load static %}
+
+{% load templates %}
+
+<head>
+    <!-- //Meta tag Keywords -->
+    <title>Reciper</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- //Meta tag Keywords -->
+    <!-- Custom-Files -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <!-- Bootstrap-Core-CSS -->
+    <!--/ Style-CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="all">
+    <!--// Style-CSS -->
+    <!-- font-awesome-icons -->
+    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+    <!-- //font-awesome-icons -->
+    <!-- /Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900"
+          rel="stylesheet">
+    <!-- //Fonts -->
+</head>
+<div class="pb-6" id="home" style="background-color: rgba(0, 0, 0, 0); margin-top: 0px;">
+    <!-- header -->
+    <header class="header">
+        <div class="container-fluid px-lg-5">
+            <!-- nav -->
+            <nav class="py-4">
+                <div id="logo">
+                    <h1><a href="/" class="editContent"
+                           style="outline: none; outline-offset: -2px; cursor: inherit; color: rgb(255, 255, 255); font-size: 40px; background-color: rgba(0, 0, 0, 0); font-family:&quot;Source: Sans Pro&quot;, sans-serif;">Reciper</a>
+                    </h1>
+                </div>
+            </nav>
+            <!-- //nav -->
+        </div>
+    </header>
+    <!-- //header -->
+
+</div>
+<body>
+
+<div class="table-responsive below_header px-4">
+    <h3 class="editContent py-3" style="outline: none; cursor: inherit;">
+        Рецепти
+    </h3>
+    <table class="table table-bordered w-100">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Рецепт</th>
+            <th scope="col">Автор</th>
+            <th scope="col">Категорія</th>
+            <th scope="col">Кількість переглядів</th>
+            <th scope="col">Кількість збережень</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for recipe in recipes %}
+            <tr>
+                <th scope="row">{{ recipe.id }}</th>
+                <td>{{ recipe.title }}</td>
+                <td>
+                    {{ recipe.author.user.username }}
+                </td>
+                <td>
+                    {{ recipe.categories.all|join:", " }}
+                </td>
+                <td>{{ recipe.reviews }}</td>
+                <td>{{ recipe.severs.all|length }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="table-responsive  px-4">
+    <h3 class="editContent pb-3" style="outline: none; cursor: inherit;">
+        Користувачі
+    </h3>
+    <table class="table table-bordered w-100">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Псевдонім</th>
+            <th scope="col">Кількість рецептів</th>
+            <th scope="col">Сумарна кількість переглядів</th>
+            <th scope="col">Кількість збережень іншими користувачами</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for usr in users %}
+            <tr>
+                <th scope="row">{{ usr.id }}</th>
+                <td>{{ usr.user.username }}</td>
+                <td>
+                    {{ usr.own_recipes.all|length }}
+                </td>
+                <td>
+                    {{ usr.own_recipes.all|sum_list }}
+                </td>
+                <td>{{ usr.own_recipes.all|saved_count }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>

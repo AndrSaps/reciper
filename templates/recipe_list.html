@@ -1,0 +1,45 @@
+{% extends 'base-recipe.html' %}
+<!-- product right -->
+{% block recipes %}
+    {#    {% include 'incude/filters.html' %}#}
+    <div class="left-ads-display">
+        {% for recipe in recipe_list %}
+            <div class="card p-3 my-2">
+                <div class="product-men">
+                    <div class="editContent d-flex w-100">
+                        <div class="w-25 pr-3">
+                            <img src="{{ recipe.photo.url }}" class="img-fluid" height="auto" alt="">
+                        </div>
+                        <div class="item-info-product w-75 direction">
+                            <h4>
+                                <a href="{% url 'add_review' recipe.id %}" class="editContent">
+                                    {{ recipe.title|title }}
+                                </a>
+                            </h4>
+                            <div style="margin-bottom: auto">
+                                <div class="grid-price">
+                                    <span class="money editContent text-justify">{{ recipe.description }}</span>
+                                </div>
+                            </div>
+                            <div class="bottom">
+                                {% for cat in recipe.cook_categories.all %}
+                                    <img src="{{ cat.photo.url }}" width="40px" class="img-fluid" height="auto"
+                                         alt="">
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="ml-auto pt-3">
+                            <div class="p-2 d-inline-block pl-4 pt-1 text-md-center">
+                                <div>{{ recipe.author.user.username|title }}</div>
+                                <div>
+                                    <img class="small-avatar" src="/{{ recipe.author.photo.url }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+{% endblock recipes %}

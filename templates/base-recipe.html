@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section class="ab-info-main py-md-6 py-4 editContent" style="padding-left: 3rem; padding-right: 3rem;">
+        <div class="container-fluid below_header d-flex w-100">
+            {% block stick-menu %}
+                <div class="row">
+            {% endblock stick-menu %}
+
+
+            {% block recipes %}
+            {% endblock recipes %}
+            </div>
+        </div>
+    </section>
+{% endblock content %}

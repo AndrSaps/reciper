@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+&nbsp;{% block content %}
+    <div class="below_header d-flex justify-content-center" style="height: 100vh;">
+        <div>
+            <form id="user_form" method="post" action="{% url 'register' %}" style="margin-top: 100px;"
+                  enctype="multipart/form-data">
+
+                {% csrf_token %}
+                {{ user_form.as_p }}
+                {{ service_user_form.as_p }}
+
+                <!-- Provide a button to click to submit the form. -->
+                <input type="submit" name="submit" value="Register"/>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,19 @@
+<!-- templates/registration/login.html -->
+{% extends 'base.html' %}
+&nbsp;{% block content %}
+    <div id="content-container" class="container p-none below_header">
+        <div class="lgn-container mt-3">
+            {% if user.is_authenticated %}
+                <div class="text-center">
+                    <h3 class="editContent my-5">Ви уже увійшли!</h3>
+                </div>
+            {% else %}
+                <form class="d-flex py-5 direction align-items-center" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-default" type="submit">Вхід</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}
